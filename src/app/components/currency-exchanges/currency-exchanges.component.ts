@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, isDevMode } from '@angular/core';
 import { CurrencyExchangesService } from '../../services/currency-exchanges.service';
 import { CurrencyExchange } from '../../models/currency-exchange';
 
@@ -11,12 +11,18 @@ import { CurrencyExchange } from '../../models/currency-exchange';
 export class CurrencyExchangesComponent implements OnInit {
 
   currency =  '';
-  imgPath = '../../../assets/flag-img/1x1/';
+  // Para prod funciona este path
+  imgPath = './assets/flag-img/1x1/';
   imgExt = '.svg';
 
   constructor(
     public _currencyexchangeService: CurrencyExchangesService
-  ) { }
+  ) {
+    if (isDevMode()) {
+      this.imgPath = '../../../assets/flag-img/1x1/';
+      // this.imgPath = '../../../assets/flag-img/1x1/';
+    }
+  }
 
   ngOnInit() {
     this.getCurrencyExchanges();
