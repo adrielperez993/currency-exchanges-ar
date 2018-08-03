@@ -14,6 +14,8 @@ export class CurrencyExchangesComponent implements OnInit {
   // Para prod funciona este path
   imgPath = './assets/flag-img/1x1/';
   imgExt = '.svg';
+  resourceLoaded = false;
+  spinner = { color: 'primary', mode: 'indeterminate', value: 50 };
 
   constructor(
     public _currencyexchangeService: CurrencyExchangesService
@@ -32,6 +34,7 @@ export class CurrencyExchangesComponent implements OnInit {
     this._currencyexchangeService.getCurrencyExchanges()
     .subscribe(res => {
       this._currencyexchangeService.currencyExchanges = res as CurrencyExchange[];
+      this.resourceLoaded = true;
     });
 
   }

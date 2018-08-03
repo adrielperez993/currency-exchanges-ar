@@ -1,13 +1,20 @@
-<mat-form-field class="currency-list currency-full-width" color="primary">
-  <input matInput [(ngModel)]="currency" placeholder="Filter currency" autocomplete="off">
-</mat-form-field>
-<br>
-<mat-list class="currency-list">
-  <h2 matSubheader>Currency Exchanges {{currency}}</h2>
-  <mat-list-item class="currency-full-width" *ngFor="let currencyExchange of _currencyexchangeService.currencyExchanges | currencySearch: currency">
-    <img matListAvatar src={{imgPath}}{{currencyExchange.Currency.toLowerCase()}}{{imgExt}} alt="">
-    <h1 matLine>{{currencyExchange.Currency}}</h1>
-    <h4 matLineEnd>{{currencyExchange.Exchange | currency}}</h4>
-    <p matLine>{{currencyExchange.Date | date}}</p>
-  </mat-list-item>
-</mat-list>
+<div *ngIf="!resourceLoaded" class="currency-spinner" fxLayout="row" fxLayoutWrap fxLayoutAlign="center center">
+  <mat-progress-spinner [color]="spinner.color" [mode]="spinner.mode" [value]="spinner.value">
+  </mat-progress-spinner>
+</div>
+
+<div *ngIf="resourceLoaded">
+  <mat-form-field class="currency-list currency-full-width" color="primary">
+    <input matInput [(ngModel)]="currency" placeholder="Filter currency" autocomplete="off">
+  </mat-form-field>
+  <br>
+  <mat-list class="currency-list">
+    <h2 matSubheader>Currency Exchanges {{currency}}</h2>
+    <mat-list-item class="currency-full-width" *ngFor="let currencyExchange of _currencyexchangeService.currencyExchanges | currencySearch: currency">
+      <img matListAvatar src={{imgPath}}{{currencyExchange.Currency.toLowerCase()}}{{imgExt}} alt="">
+      <h1 matLine>{{currencyExchange.Currency}}</h1>
+      <h4 matLineEnd>{{currencyExchange.Exchange | currency}}</h4>
+      <p matLine>{{currencyExchange.Date | date}}</p>
+    </mat-list-item>
+  </mat-list>
+</div>
