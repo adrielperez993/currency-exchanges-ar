@@ -4,17 +4,59 @@
 </div>
 
 <div *ngIf="resourceLoaded">
-  <mat-form-field class="currency-list currency-full-width" color="primary">
-    <input matInput [(ngModel)]="currency" placeholder="Filter currency" autocomplete="off">
-  </mat-form-field>
-  <br>
-  <mat-list class="currency-list">
-    <h2 matSubheader>Currency Exchanges {{currency}}</h2>
-    <mat-list-item class="currency-full-width" *ngFor="let currencyExchange of _currencyexchangeService.currencyExchanges | currencySearch: currency">
-      <img matListAvatar src={{imgPath}}{{currencyExchange.Currency.toLowerCase()}}{{imgExt}} alt="">
-      <h1 matLine>{{currencyExchange.Currency}}</h1>
-      <h4 matLineEnd>{{currencyExchange.Exchange | currency}}</h4>
-      <p matLine>{{currencyExchange.Date | date}}</p>
-    </mat-list-item>
-  </mat-list>
+  <div class="container" fxLayout="row" fxLayoutWrap fxLayoutAlign="end center">
+    <button mat-button color="accent" *ngIf="!isList" (click)="setViewList()" matTooltip="List view">
+      <mat-icon>view_list</mat-icon>
+      <!-- <span>List view</span> -->
+    </button>
+    <button mat-button color="accent" *ngIf="isList" (click)="setViewList()" matTooltip="Grid view">
+      <mat-icon>view_module</mat-icon>
+      <!-- <span>Grid view</span> -->
+    </button>
+  </div>
+  <div class="container" fxLayout="row" fxLayoutWrap fxLayoutAlign="center">
+    <mat-form-field class="currency-list currency-list-full-width" color="primary">
+      <input matInput [(ngModel)]="currency" placeholder="Filter currency" autocomplete="off">
+    </mat-form-field>
+    <br>
+  </div>
+
+  <div *ngIf="isList">
+    <div class="container" fxLayout="column" fxLayoutWrap>
+      <mat-list class="currency-list">
+        <h2 matSubheader>Currency Exchanges {{currency}}</h2>
+        <mat-list-item class="currency-list-full-width" *ngFor="let currencyExchange of _currencyexchangeService.currencyExchanges | currencySearch: currency">
+          <img matListAvatar src={{imgPath}}{{currencyExchange.Currency.toLowerCase()}}{{imgExt}} alt="">
+          <h1 matLine>{{currencyExchange.Currency}}</h1>
+          <h4 matLineEnd>{{currencyExchange.Exchange | currency}}</h4>
+          <p matLine>{{currencyExchange.Date | date}}</p>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+
+  <div *ngIf="!isList" class="currency-cards" fxLayout="column wrap" fxLayoutAlign="center center">
+    <mat-card class="currency-card" *ngFor="let currencyExchange of _currencyexchangeService.currencyExchanges | currencySearch: currency">
+      <mat-card-header>
+        <img mat-card-avatar src={{imgPath}}{{currencyExchange.Currency.toLowerCase()}}{{imgExt}} alt="">
+        <mat-card-title>{{currencyExchange.Currency}}</mat-card-title>
+        <mat-card-subtitle>Currency Name</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src={{imgPath}}{{currencyExchange.Currency.toLowerCase()}}{{imgExt}}>
+      <mat-card-content>
+        <p>Cotiza:
+          <b>{{currencyExchange.Exchange | currency}}</b>
+        </p>
+        <p>{{currencyExchange.Date | date}}</p>
+        <!-- <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, eaque exercitationem voluptas blanditiis error dolores,
+            ut excepturi, ea quod vero obcaecati. Ducimus perferendis molestiae facilis ut, laudantium eveniet ipsam saepe.
+          </p> -->
+      </mat-card-content>
+      <!-- <mat-card-actions>
+          <button mat-button color="accent">LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions> -->
+    </mat-card>
+  </div>
 </div>

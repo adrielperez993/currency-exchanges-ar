@@ -8,18 +8,35 @@
   max-width: 768px;
 }
 
-.currency-full-width {
+.currency-list-full-width {
   width: 100%;
 }
 
-img {
-  width: 15px;
-  height: 15px;
+.currency-card {
+  margin: 40px;
+
+}
+.currency-cards {
+  max-width: 400px;
+  margin: 0;
 }
 
 @media screen and (max-width: 500px) {
   .currency-list {
     min-width: 300px;
     max-width: 500px;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .currency-list {
+    min-width: 450px;
+    max-width: 600px;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .currency-list {
+    min-width: 960px;
   }
 }

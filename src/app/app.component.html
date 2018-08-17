@@ -1,5 +1,19 @@
 <mat-toolbar color="primary">
   Today's Currency Exchanges
+  <span class="toolbar-spacer"></span>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="refresh()">
+      <mat-icon>refresh</mat-icon>
+      <span>Refresh</span>
+    </button>
+    <!-- <button mat-menu-item *ngIf="isList" (click)="setViewList()">
+        <mat-icon>view_module</mat-icon>
+        <span>Card</span>
+      </button> -->
+  </mat-menu>
 </mat-toolbar>
 <div class="container" fxLayout="row" fxLayoutWrap fxLayoutAlign="space-around center">
   <app-currency-exchanges></app-currency-exchanges>

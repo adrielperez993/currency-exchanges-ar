@@ -16,6 +16,7 @@ export class CurrencyExchangesComponent implements OnInit {
   imgExt = '.svg';
   resourceLoaded = false;
   spinner = { color: 'primary', mode: 'indeterminate', value: 50 };
+  isList = true;
 
   constructor(
     public _currencyexchangeService: CurrencyExchangesService
@@ -36,6 +37,9 @@ export class CurrencyExchangesComponent implements OnInit {
       this._currencyexchangeService.currencyExchanges = res as CurrencyExchange[];
       this.resourceLoaded = true;
     });
-
   }
+
+    setViewList() {
+      this.isList = !this.isList;
+    }
 }
