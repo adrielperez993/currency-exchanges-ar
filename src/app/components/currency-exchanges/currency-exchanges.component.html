@@ -17,6 +17,9 @@
   <div class="container" fxLayout="row" fxLayoutWrap fxLayoutAlign="center">
     <mat-form-field class="currency-list currency-list-full-width" color="primary">
       <input matInput [(ngModel)]="currency" placeholder="Filter currency" autocomplete="off">
+      <button mat-button *ngIf="currency" matSuffix mat-icon-button aria-label="Clear" (click)="currency=''">
+          <mat-icon>close</mat-icon>
+        </button>
     </mat-form-field>
     <br>
   </div>
@@ -25,7 +28,7 @@
     <div class="container" fxLayout="column" fxLayoutWrap>
       <mat-list class="currency-list">
         <h2 matSubheader>Currency Exchanges {{currency}}</h2>
-        <mat-list-item class="currency-list-full-width" *ngFor="let currencyExchange of _currencyexchangeService.currencyExchanges | currencySearch: currency">
+        <mat-list-item class="currency-list-full-width" *ngFor="let currencyExchange of currencyExchangeFullList | currencySearch: currency">
           <img matListAvatar src={{imgPath}}{{currencyExchange.Currency.toLowerCase()}}{{imgExt}} alt="">
           <h1 matLine>{{currencyExchange.Currency}}</h1>
           <h4 matLineEnd>{{currencyExchange.Exchange | currency}}</h4>
@@ -35,17 +38,17 @@
     </div>
   </div>
 
-  <div *ngIf="!isList" class="currency-cards" fxLayout="column wrap" fxLayoutAlign="center center">
-    <mat-card class="currency-card" *ngFor="let currencyExchange of _currencyexchangeService.currencyExchanges | currencySearch: currency">
+  <div *ngIf="!isList" class="currency-cards" fxLayout="column wrap" fxLayoutWrap fxLayoutAlign="center center">
+    <mat-card class="currency-card" *ngFor="let currencyExchange of currencyExchangeFullList | currencySearch: currency">
       <mat-card-header>
         <img mat-card-avatar src={{imgPath}}{{currencyExchange.Currency.toLowerCase()}}{{imgExt}} alt="">
         <mat-card-title>{{currencyExchange.Currency}}</mat-card-title>
-        <mat-card-subtitle>Currency Name</mat-card-subtitle>
+        <mat-card-subtitle>{{currencyExchange.Name}}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src={{imgPath}}{{currencyExchange.Currency.toLowerCase()}}{{imgExt}}>
+      <img mat-card-image class="img-responsive" src={{sitesImgPath}}{{currencyExchange.Currency.toLowerCase()}}{{sitesImgExt}} height="auto">
       <mat-card-content>
         <p>Cotiza:
-          <b>{{currencyExchange.Exchange | currency}}</b>
+          <b style="font-size: 1.5em">{{currencyExchange.Exchange | currency}}</b>
         </p>
         <p>{{currencyExchange.Date | date}}</p>
         <!-- <p>

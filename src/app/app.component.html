@@ -1,4 +1,69 @@
-<mat-toolbar color="primary">
+<div [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a class="toolbar-title-link" [routerLink]="['/']">
+      <img src="{{mobileQuery.matches ? logoImgMobile : logoImg}}" alt="">
+      <!-- <img src="mobileQuery.matches ? {{logoImgPath}}ES.png : {{logoImgPath}}TodaysCurrencyExchanges.png" alt=""> -->
+      <!-- <h1 class="example-app-name">Today's Currency Exchanges</h1> -->
+    </a>
+    <span class="toolbar-spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="refresh()">Refresh</button>
+      <button mat-menu-item [routerLink]="['credit']">Credits</button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <!-- <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 64 : 0"> -->
+    <!-- <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="64"
+      style="width: 300px; background:#80CBC4; height: 100vh;"> -->
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" fixedInViewport [style.marginTop.px]="64"
+      style="width: 300px; background:#80CBC4; height: 100vh;">
+      <mat-nav-list fxLayout="column">
+        <h3>CURRENCIES</h3>
+        <a mat-list-item class="sidenav-link" [routerLink]="['/']">
+          <mat-icon>euro_symbol</mat-icon>&nbsp;&nbsp;List of Currencies</a>
+        <h3>TOOLS</h3>
+          <a mat-list-item class="sidenav-link" [routerLink]="['/conversor']">
+          <mat-icon>assessment</mat-icon>&nbsp;&nbsp;Conversor</a>
+        <mat-divider></mat-divider>
+        <a mat-list-item class="sidenav-link" [routerLink]="['/settings']">
+          <mat-icon>settings</mat-icon>&nbsp;&nbsp;Settings</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="container" fxLayout="row" fxLayoutWrap fxLayoutAlign="center none">
+        <!-- <app-currency-exchanges></app-currency-exchanges> -->
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+<footer class="footer-container alternative" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="50px">
+  <div>
+    <p>Developed by Ing. Adriel Pérez Alegre &reg; 2018</p>
+    <p>
+      Contact: &nbsp;&nbsp;
+      <a href="mailto:adriel.perez993@gmail.com" style="color: #ffffff"><mat-icon>email</mat-icon></a>
+      &nbsp;&nbsp;
+      <a href="https://www.linkedin.com/in/adriel-p%C3%A9rez-alegre-a66bb8131/" target="_blank"><img src="{{mediaImgPath}}linkedin.svg"
+          alt="" width="25px" height="25px"></a>
+      &nbsp;&nbsp;
+      <a href="https://facebook.com/adriel.perez.581" target="_blank"><img src="{{mediaImgPath}}facebook.svg" alt="" width="25px"
+          height="25px"></a>
+    </p>
+  </div>
+</footer>
+
+<!-- ACA ESTA EL TOOLBAR VIEJO -->
+<!-- <mat-toolbar color="primary">
   Today's Currency Exchanges
   <span class="toolbar-spacer"></span>
   <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -9,12 +74,8 @@
       <mat-icon>refresh</mat-icon>
       <span>Refresh</span>
     </button>
-    <!-- <button mat-menu-item *ngIf="isList" (click)="setViewList()">
-        <mat-icon>view_module</mat-icon>
-        <span>Card</span>
-      </button> -->
   </mat-menu>
 </mat-toolbar>
 <div class="container" fxLayout="row" fxLayoutWrap fxLayoutAlign="space-around center">
   <app-currency-exchanges></app-currency-exchanges>
-</div>
+</div> -->

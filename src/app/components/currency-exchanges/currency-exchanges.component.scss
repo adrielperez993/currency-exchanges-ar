@@ -28,7 +28,7 @@
   }
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 600px) {
   .currency-list {
     min-width: 450px;
     max-width: 600px;
@@ -38,5 +38,9 @@
 @media screen and (min-width: 960px) {
   .currency-list {
     min-width: 960px;
+  }
+
+  mat-card  {
+    width: 960px;
   }
 }

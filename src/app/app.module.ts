@@ -3,10 +3,14 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
 // Components
 import { AppComponent } from './app.component';
 import { CurrencyExchangesComponent } from './components/currency-exchanges/currency-exchanges.component';
+import { ConversorComponent } from './components/conversor/conversor.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { CreditComponent } from './components/credit/credit.component';
 
 // Services
 import { CurrencyExchangesService } from './services/currency-exchanges.service';
@@ -58,12 +62,25 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
+const appRoutes: Routes = [
+    { path: 'conversor', component: ConversorComponent },
+    { path: 'credit', component: CreditComponent },
+    { path: '', component: CurrencyExchangesComponent },
+    // { path: '', redirectTo: '/', pathMatch: 'full' },
+    { path: '**', component: PageNotFoundComponent },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     CurrencyExchangesComponent,
-    CurrencySearchPipe
+    CurrencySearchPipe,
+    ConversorComponent,
+    PageNotFoundComponent,
+    CreditComponent
   ],
   imports: [
     BrowserModule,
@@ -108,6 +125,8 @@ import {
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [
     CurrencyExchangesService,

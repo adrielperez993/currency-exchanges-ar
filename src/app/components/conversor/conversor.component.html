@@ -1,0 +1,44 @@
+<div>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Convert any currency</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form style="display: flex" action="">
+        <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="10px">
+          <div fxFlex>
+            <mat-select placeholder="Currency from" [(value)]="selectedCurrencyFrom">
+              <mat-option *ngFor="let currencyExchange of currencyExchangeFullList" [value]="currencyExchange.Currency">
+                <img aria-hidden src="{{imgPath}}{{currencyExchange.Currency.toLowerCase()}}.svg" height="25">
+                <span> {{currencyExchange.Currency}}</span> |
+                <small>{{currencyExchange.Name}}</small>
+              </mat-option>
+            </mat-select>
+            <mat-form-field style="width: 100%">
+              <input [(ngModel)]="amount" name="amount" matInput placeholder="Amount" autocomplete="off">
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-icon-button matTooltip="Intercambiar" color="accent" (click)="intercambiar()"><mat-icon>compare_arrows</mat-icon></button>
+          </div>
+          <div fxFlex>
+            <mat-select placeholder="Currency to" [(value)]="selectedCurrencyTo">
+              <mat-option *ngFor="let currencyExchange of currencyExchangeFullList" [value]="currencyExchange.Currency">
+                <img aria-hidden src="{{imgPath}}{{currencyExchange.Currency.toLowerCase()}}.svg" height="25">
+                <span> {{currencyExchange.Currency}}</span> |
+                <small>{{currencyExchange.Name}}</small>
+              </mat-option>
+            </mat-select>
+            <div style="height: 100%; height: 100%;">
+              <h3>$ {{result}}</h3>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="calculate()">CONVERT</button>
+      <button mat-button color="accent" matTooltip="Reset values" (click)="clearFields()"><mat-icon>delete</mat-icon></button>
+    </mat-card-actions>
+  </mat-card>
+</div>
